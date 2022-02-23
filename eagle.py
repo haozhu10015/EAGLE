@@ -37,10 +37,10 @@ class EAGLE:
         """
         if data_type == 'networkx_graph':
             self._g = graph_data
-            self._adj_matrix = nx.adjacency_matrix(graph_data).todense()
+            self._adj_matrix = self._generate_adjmatrix_from_graph()
         elif data_type == 'adjacency_matrix':
-            self._g = self._set_graph_from_adjmatrix(graph_data)
             self._adj_matrix = graph_data
+            self._g = self._set_graph_from_adjmatrix()
         else:
             raise ValueError("Unknown graph data type '{}'. "
                              "Data type should be in ['networkx_graph', 'adjacency_matrix']".format(data_type))
@@ -53,28 +53,39 @@ class EAGLE:
         self._max_EQ_index = None
         self._layer_with_max_EQ = None
 
-    def _set_graph_from_adjmatrix(self, adj_matrix):
+    def _set_graph_from_adjmatrix(self):
         """Generate a NetworkX graph according to its adjacency matrix.
-
-        Parameters
-        ----------
-        adj_matrix : numpy.ndarray
-                    adjacency matrix of graph.
 
         Returns
         -------
         graph: NetworkX graph
             A NetworkX graph data generated based on the input adjacency matrix.
         """
-        assert adj_matrix.shape[0] == adj_matrix.shape[1]
-        num_nodes = adj_matrix.shape[0]
+        assert self._adj_matrix.shape[0] == self._adj_matrix.shape[1]
+        num_nodes = self._adj_matrix.shape[0]
         graph = nx.Graph()
         for i in range(num_nodes):
             for j in range(num_nodes):
-                if i < j and adj_matrix[i, j] == 1:
+                if i < j and self._adj_matrix[i, j] == 1:
                     graph.add_edge(i+1, j+1)
 
         return graph
+
+    def _generate_adjmatrix_from_graph(self):
+        """Generate the adjacency matrix of a NetworkX graph.
+
+        Returns
+        -------
+        adj_matrix: numpy.ndarray
+                    The adjacency matrix of given NetworkX graph.
+        """
+        max_node_number = max(self._g.nodes)
+        adj_matrix = np.zeros((max_node_number, max_node_number))
+        for i in range(max_node_number):
+            for j in range(max_node_number):
+                if (i + 1, j + 1) in self._g.edges:
+                    adj_matrix[i, j] = 1
+        return adj_matrix
 
     def _remove_zero_degree_nodes(self):
         """Remove those nodes without any edges in the graph.
@@ -102,8 +113,8 @@ class EAGLE:
         for clique in maximal_cliques:
             if len(clique) >= self._maximal_clique_cutoff:
                 basic_cliques.append(clique)
-                for n in remainder_nodes:
-                    if n in clique:
+                for n in clique:
+                    if n in remainder_nodes:
                         remainder_nodes.remove(n)
         if len(remainder_nodes) != 0:
             basic_cliques.append(remainder_nodes)
