@@ -32,9 +32,9 @@ if __name__ == '__main__':
     # Plot the EQ list.
     max_EQ_index = len(eagle.get_community_structure())
 
-    fig = plt.figure(5, dpi=25)
+    fig = plt.figure(5, dpi=75)
     plt.plot(range(1, len(eagle.get_EQ_list()) + 1), eagle.get_EQ_list())
-    plt.plot([max_EQ_index, max_EQ_index], [0, 0.55], ls='--')
+    # plt.plot([max_EQ_index, max_EQ_index], [0, 0.55], ls='--')
     plt.ylabel('EQ')
     fig.savefig(os.path.join(io_path, 'EQ_list.png'))
     plt.show()
