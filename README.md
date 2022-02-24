@@ -33,7 +33,7 @@ Here we reproduce Figure 1(d) from the paper. Example codes can be found in *exa
 
 ![Figure 1(d)](./media/fig_1d.png) 
 
-The figure below illustrates the curve of EQ corresponding to each cover
+The figure below shows the detected community structure of the network in Fiure 1(d) from the paper and the curve of EQ corresponding to each cover
 of the network when the dendrogram is cut at different layer.
 
 ![Result](./media/result.png)
