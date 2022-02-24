@@ -23,13 +23,14 @@ pip install -r requirements.txt
 
 ## Example
 
+
+Here we reproduce Figure 1(d) from the paper. Example codes can be found in *example.py* which detected three overlapped communities in the original network. 
+
 To run the example code, run *example.py*:
 
 ```text
 python example.py
 ```
-
-Here we reproduce Figure 1(d) from the paper. Example codes can be found in *example.py* which detected three overlapped communities in the original network. 
 
 ![Figure 1(d)](./media/fig_1d.png) 
 
