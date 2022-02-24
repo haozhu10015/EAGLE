@@ -34,7 +34,7 @@ python example.py
 
 ![Figure 1(d)](./media/fig_1d.png) 
 
-The figure below shows the detected community structure of the network in Fiure 1(d) from the paper and the curve of EQ corresponding to each cover
+The figure below shows the detected community structure of the network in Fiure 1(d) from the paper by *example.py* and the curve of EQ corresponding to each cover
 of the network when the dendrogram is cut at different layer.
 
 ![Result](./media/result.png)
