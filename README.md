@@ -45,7 +45,7 @@ If you find this code useful for your research, please cite:
 
 ```
 @misc{HaoZhu10015_2022,
-  author = {HaoZhu10015},
+  author = {Hao Zhu},
   title = {EAGLE},
   year = {2022},
   publisher = {GitHub},
